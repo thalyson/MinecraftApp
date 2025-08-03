@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-bold mb-4">Login</h2>
+
+  {% if error %}
+    <p class="mb-4 text-red-600">{{ error }}</p>
+  {% endif %}
+
+  <form method="post" action="/login" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium">Email</label>
+      <input type="email" name="email" class="w-full border p-2" required />
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Password</label>
+      <input type="password" name="password" class="w-full border p-2" required />
+    </div>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Login</button>
+  </form>
+
+  <p class="mt-4 text-sm">
+    No account? <a href="/register" class="text-blue-600">Register</a>
+  </p>
+  <p class="mt-2 text-sm">
+    Esqueceu a senha? <a href="https://discord.com/users/TalianTown" class="text-blue-600">Fale comigo no Discord</a>
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Admin Dashboard</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-semibold">Pending Deposits</h3>
+    <p class="text-2xl">{{ pending_payments }}</p>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-semibold">Pending Withdrawals</h3>
+    <p class="text-2xl">{{ pending_withdrawals }}</p>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-semibold">Volume (24h)</h3>
+    <p class="text-2xl">{{ '{:.2f}'.format(volume_24h) }}</p>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-semibold">Profit (30d)</h3>
+    <p class="text-2xl">{{ '{:.2f}'.format(profit_30d) }}</p>
+  </div>
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-semibold">Free Cash</h3>
+    <p class="text-2xl">{{ '{:.2f}'.format(free_cash) }}</p>
+  </div>
+</div>
+{% endblock %}

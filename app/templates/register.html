@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-xl font-bold mb-4">Register</h2>
+  <form method="post" action="/register" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium">Email</label>
+      <input type="email" name="email" class="w-full border p-2" required />
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Password</label>
+      <input type="password" name="password" class="w-full border p-2" required />
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Minecraft UUID (optional)</label>
+      <input type="text" name="mc_uuid" class="w-full border p-2" />
+    </div>
+	<div>
+		<label class="block text-sm font-medium">Minecraft Nickname</label>
+		<input type="text" name="mc_nick" class="w-full border p-2" required />
+	</div>
+	<div>
+		<label class="block text-sm font-medium">Discord Nickname</label>
+		<input type="text" name="discord_nick" class="w-full border p-2" required />
+	</div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Register</button>
+  </form>
+  <p class="mt-4 text-sm">Already have an account? <a href="/login" class="text-blue-600">Login</a></p>
+</div>
+{% endblock %}

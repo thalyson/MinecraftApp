@@ -1,0 +1,42 @@
+## Configuration file for the Stock & Bond Trade application
+
+# Fee and revenue model. Values expressed as percentage points
+fees:
+  maker_fee: 0.1    # Applied to limit orders adding liquidity
+  taker_fee: 0.2    # Applied to orders removing liquidity
+  deposit_fee: 0.0  # Percent charged on deposits
+  withdraw_fee: 0.1 # Percent charged on withdrawals
+  custody_fee: 0.0  # Periodic fee for holding positions
+  ipo_spread: 5.0   # Spread applied during IPO book building
+
+# Advertisements and consent banner configuration
+ads:
+  enabled: true
+  disable_on_routes:
+    - "/portfolio"
+    - "/order"
+    - "/admin"
+
+# Admin roles and other settings
+roles:
+  admin_email: "admin@example.com"
+  initial_users: []
+
+# 2FA settings
+security:
+  enable_2fa: false
+
+# JWT configuration
+jwt:
+  secret_key: "CHANGE_ME_TO_A_RANDOM_SECRET"
+  algorithm: "HS256"
+  access_token_expires_minutes: 60
+
+# Database connection strings
+database:
+  # Used in development; when deploying, set via environment variable DATABASE_URL
+  url: "sqlite+aiosqlite:///./stockbond.db"
+
+# Paths for uploaded proofs and static files
+storage:
+  proofs_dir: "uploaded_proofs"

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Withdrawals Queue{% endblock %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Withdrawals Queue</h2>
+{% if withdrawals %}
+<table class="min-w-full bg-white rounded shadow">
+  <thead class="bg-gray-200">
+    <tr>
+      <th class="px-4 py-2">ID</th>
+      <th class="px-4 py-2">User</th>
+      <th class="px-4 py-2">Amount</th>
+      <th class="px-4 py-2">Timestamp</th>
+      <th class="px-4 py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for w in withdrawals %}
+    <tr class="border-t">
+      <td class="px-4 py-2">{{ w.id }}</td>
+      <td class="px-4 py-2">{{ w.user_id }}</td>
+      <td class="px-4 py-2">{{ '{:.2f}'.format(w.amount) }}</td>
+      <td class="px-4 py-2">{{ w.ts.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+      <td class="px-4 py-2 space-x-2">
+        <form method="post" action="/admin/withdrawals/{{ w.id }}/approve" class="inline">
+          <button type="submit" class="bg-green-600 text-white px-2 py-1 rounded text-sm">Approve</button>
+        </form>
+        <form method="post" action="/admin/withdrawals/{{ w.id }}/deny" class="inline">
+          <button type="submit" class="bg-red-600 text-white px-2 py-1 rounded text-sm">Deny</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No pending withdrawals.</p>
+{% endif %}
+{% endblock %}

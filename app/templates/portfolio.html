@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Portfolio{% endblock %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Your Portfolio</h2>
+{% if portfolio %}
+<table class="min-w-full bg-white rounded shadow">
+  <thead class="bg-gray-200">
+    <tr>
+      <th class="px-4 py-2 text-left">Ticker</th>
+      <th class="px-4 py-2 text-left">Name</th>
+      <th class="px-4 py-2 text-right">Qty</th>
+      <th class="px-4 py-2 text-right">Avg Price</th>
+      <th class="px-4 py-2 text-right">Last Price</th>
+      <th class="px-4 py-2 text-right">Unrealized P/L</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in portfolio %}
+    <tr class="border-t">
+      <td class="px-4 py-2">{{ item.ticker }}</td>
+      <td class="px-4 py-2">{{ item.name }}</td>
+      <td class="px-4 py-2 text-right">{{ item.qty }}</td>
+      <td class="px-4 py-2 text-right">{{ '{:.2f}'.format(item.avg_price) }}</td>
+      <td class="px-4 py-2 text-right">{{ '{:.2f}'.format(item.last_price) }}</td>
+      <td class="px-4 py-2 text-right {% if item.unrealized > 0 %}text-green-600{% elif item.unrealized < 0 %}text-red-600{% endif %}">{{ '{:.2f}'.format(item.unrealized) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>You have no positions yet.</p>
+{% endif %}
+{% endblock %}

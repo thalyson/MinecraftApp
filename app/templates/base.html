@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Stock & Bond Exchange{% endblock %}</title>
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+    <nav class="bg-blue-600 p-4 text-white flex justify-between">
+      <div class="font-bold">
+        <a href="/portfolio">Stock & Bond</a>
+      </div>
+      <div>
+        <a href="/portfolio" class="mr-4">Portfolio</a>
+        <a href="/wallet" class="mr-4">Wallet</a>
+        <a href="/market/ABC" class="mr-4">Market</a>
+        <a href="/admin" class="mr-4">Admin</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </nav>
+    <main class="container mx-auto p-4">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

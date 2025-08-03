@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Wallet{% endblock %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Wallet</h2>
+<p class="mb-2">Current cash balance: <span class="font-bold">{{ '{:.2f}'.format(cash_balance) }}</span></p>
+
+<div class="grid grid-cols-2 gap-4">
+  <!-- Deposit Form -->
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-bold mb-2">Deposit Funds</h3>
+    <form method="post" enctype="multipart/form-data" action="/wallet/deposit" class="space-y-2">
+      <div>
+        <label class="block text-sm">Amount</label>
+        <input type="number" step="0.01" name="amount" class="w-full border p-2" required />
+      </div>
+      <div>
+        <label class="block text-sm">Proof screenshot (PNG/JPG)</label>
+        <input type="file" name="proof" accept=".png,.jpg,.jpeg" class="w-full border p-2" required />
+      </div>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Submit Deposit</button>
+    </form>
+  </div>
+  <!-- Withdrawal Form -->
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-bold mb-2">Request Withdrawal</h3>
+    <form method="post" action="/wallet/withdraw" class="space-y-2">
+      <div>
+        <label class="block text-sm">Amount</label>
+        <input type="number" step="0.01" name="amount" class="w-full border p-2" required />
+      </div>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Request Withdrawal</button>
+    </form>
+  </div>
+</div>
+
+<h3 class="text-xl font-bold mt-6 mb-2">Cash Ledger</h3>
+<table class="min-w-full bg-white rounded shadow">
+  <thead class="bg-gray-200">
+    <tr>
+      <th class="px-4 py-2">Timestamp</th>
+      <th class="px-4 py-2">Delta</th>
+      <th class="px-4 py-2">Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in ledger %}
+    <tr class="border-t">
+      <td class="px-4 py-2">{{ entry.ts.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+      <td class="px-4 py-2">{{ '{:.2f}'.format(entry.delta) }}</td>
+      <td class="px-4 py-2">{{ entry.reason }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

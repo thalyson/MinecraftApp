@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: stockbond
+      POSTGRES_PASSWORD: stockbond
+      POSTGRES_DB: stockbond
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/code
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://stockbond:stockbond@db/stockbond
+      - JWT_SECRET_KEY=CHANGEME
+      - CONFIG_FILE=/code/config.yml
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.25
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - api
+
+volumes:
+  db_data:
